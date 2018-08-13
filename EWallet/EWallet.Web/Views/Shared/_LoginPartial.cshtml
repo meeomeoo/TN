@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using EWallet.Data.Entities
+@using EWallet.Web.Extensions
+
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)</a>
+    <a asp-controller="Account" asp-action="Logout" class="login"> <i class="icon-logout"></i><span>Đăng xuất</span></a>
+}
+else
+{
+    <span class="btn-login login">
+        <i class="icon-user"></i>
+        <a asp-controller="Account" asp-action="Login" class="login"> Đăng nhập</a>
+    </span>
+}

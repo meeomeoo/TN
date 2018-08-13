@@ -1,0 +1,61 @@
+﻿@{string message = ViewBag.VerifyError;}
+<div class="phone-verify-wizard-wrapper">
+    @if (string.IsNullOrEmpty(message))
+    {
+        <div class="alert alert-danger" role="alert">
+            <div class="text-center">@message</div>
+        </div>
+
+    }
+    else
+    {
+        <div class="alert alert-success" role="alert">
+            <div class="text-center">Mã xác thực đã được gửi tới số điện thoại của bạn. Hãy nhập mã xác thực vào bên dưới để xác minh số điện thoại.</div>
+        </div>
+    }
+
+    <br>
+    <form name="verifyForm" class="form-horizontal verify-phone-form">
+        <div class="form-group row">
+            <div class="col-sm-9 col-sm-12">
+                <input name="phone_number" class="form-control" id="phone_number" type="hidden" value="@ViewBag.PhoneNumber">
+                <input name="phone_otp" class="form-control" id="phone_otp" required="" type="text" placeholder="Mã xác thực" value="" autocomplete="off">
+            </div>
+        </div>
+        <div class="form-group text-center">
+            <div class="col-sm-12 text-center">
+                <i class="icon-spin4 animate-spin invisible" />
+                <button id="btnConfirmVerified" class="btn-add-phone btn btn-primary" type="button">
+                    Xác thực
+                </button>
+                <button disabled="" class="btn-request-phone-call btn btn-warning" type="button">
+                    <span class="timer">(00:05)</span>
+                    Chưa nhận được SMS?
+                </button>
+                <button id="btnBackVerify" class="btn btn-default" type="button">Quay lại</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnConfirmVerified").click(function () {
+            var otp = $("#phone_otp").val();
+            var phoneNumber = $("#phone_number").val();
+            $.ajax({
+                type: "GET",
+                url: "/Account/ConfirmPhoneVerify?code=" + otp + "&phoneNumber=" + phoneNumber,
+                success: function (res) {
+                    if (res.success) {
+                        window.location.reload();
+                    }
+                }
+            })
+        });
+
+        $("#btnBackVerify").click(function () {
+            $("#popupPhoneVerifyContent").load("/Account/PhoneVerify?phoneNumber=");
+        });
+    });
+</script>

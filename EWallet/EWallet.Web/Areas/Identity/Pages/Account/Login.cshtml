@@ -1,0 +1,52 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+@section css{
+    <link href="~/css/wallet.css" rel="stylesheet" />
+}
+
+<div id="wallet">
+    <div class="page_heading">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>ĐĂNG NHẬP / ĐĂNG KÝ</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+.
+<div class="box-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-sm-push-4">
+                <form class="login-form" method="post">
+                    <div class="form-group form-grop__icon">
+                        <i class="fa icon-mail"></i>
+                        <div class="remi-colorized-field has-error">
+                            <input class="form-control" asp-for="Input.Email" placeholder="Nhập email của bạn">
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                 
+                    <div class="form-group">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-block btn-primary btn-continue" type="submit"><span>Tiếp tục</span></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

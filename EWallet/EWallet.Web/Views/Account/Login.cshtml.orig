@@ -1,0 +1,73 @@
+<<<<<<< HEAD
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+=======
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using EWallet.Data.Entities
+@using Microsoft.AspNetCore.Identity
+
+@*<main-title class="ng-isolate-scope">
+    <section class="page-heading" ng-show="vm.$state.$current.data.title || vm.$state.$current.data.dynamic_title">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="ng-binding" ng-hide="vm.$state.$current.data.dynamic_title">Đăng Nhập / Đăng Ký</h1>
+                    <h1 class="ng-binding ng-hide" ng-show="vm.$state.$current.data.dynamic_title"></h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</main-title>
+
+<react-flash-container ng-hide="rvm.$state.$current.data.noFlash">
+    <div class="container alert-container" data-reactroot="">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="position-stablizer">
+                </div><div class="flash-messages">
+                </div>
+                <div>
+                </div>
+                <div class="position-stablizer">
+                </div>
+            </div>
+        </div>
+    </div>
+</react-flash-container>
+
+<div class="main ng-scope" role="main" ui-view="">
+    <react-login class="ng-scope">
+        <section class="page-content login-page" data-reactroot="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-sm-push-4">
+                        <form class="form login-form">
+                            <div class="form-group form-grop__icon">
+                                <i class="fa icon-mail"></i>
+                                <div class="remi-colorized-field has-error">
+                                    <input name="email" class="form-control" placeholder="Nhập email của bạn" value="">
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-block btn-primary btn-continue" type="submit">
+                                    <span>Tiếp tục</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </react-login>
+</div>*@
+>>>>>>> 1969f6a2dbfa64e3b457051e5b24fb32c9064445

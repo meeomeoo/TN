@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EWallet.Data.EF\EWallet.Data.EF.csproj" />
+    <ProjectReference Include="..\EWallet.Data\EWallet.Data.csproj" />
+    <ProjectReference Include="..\EWallet.Utilities\EWallet.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="SendGrid" Version="9.9.0" />
+  </ItemGroup>
+
+</Project>

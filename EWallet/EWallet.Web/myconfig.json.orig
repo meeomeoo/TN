@@ -1,0 +1,32 @@
+﻿{
+  "MyConfig": {
+    "Default": {
+      "PageSize": "10",
+      "IsBeta": "true",
+      "FullDomain": "http://localhost:50044",
+      "ShortDomain": "localhost",
+      "TimeExpireToken": 15,
+      "IsTest": true,
+<<<<<<< HEAD
+      "DefaultAdminId": "2f17cf09-203f-47ad-961c-5e3a1edc5323",
+      //"SmtpUserName": "remitano.ewallet",
+      //"SmtpPassword": "Ewallet@123",
+      //"SmtpHost": "smtp.sendgrid.net",
+      //"SmtpPort": "2525",
+=======
+      "DefaultAdminId": "453d4715-410c-4239-8672-1bfffa57fa8b",
+      "SmtpUserName": "remitano.ewallet",
+      "SmtpPassword": "Ewallet@123",
+      "SmtpHost": "smtp.sendgrid.net",
+      "SmtpPort": "2525",
+>>>>>>> 869afa08856d75a5f1bd36aa721d4dabcde9dc87
+      "SmtpEmailAddress": "contact@domain.com",
+      "Logo": "https://tspullzone-techslingonline1.netdna-ssl.com/wp-content/uploads/2018/07/your-logo-here.png",
+
+      "SmtpUserName": "remitano.ewallet@gmail.com",
+      "SmtpPassword": "123456?a",
+      "SmtpHost": "smtp.gmail.com",
+      "SmtpPort": "587"
+    }
+  }
+}

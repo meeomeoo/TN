@@ -1,0 +1,168 @@
+﻿@using EWallet.Data.Entities
+@using EWallet.Data.Enums
+@using EWallet.Utilities.Extensions
+@model EWallet.Service.ViewModels.AdvertisementViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+@section css{
+    <link href="~/css/wallet.css" rel="stylesheet" />
+    <link href="~/css/create_ad.css" rel="stylesheet" />
+}
+
+
+<div id="wallet">
+    <div class="page_heading">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>@Model.Title</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<br /><br />
+
+<div class="main ng-scope" role="main" ui-view="" style="">
+    @if (Model.AdvertisementUser != null)
+    {
+        <react-offer-details class="ng-scope">
+
+            <section data-reactroot="" class="page-content">
+                <!-- react-empty: 2 -->
+                <div class="container offer-details-container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div>
+                                <div class="main-container">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="col-md-8 col-md-push-2 col-lg-6 col-lg-push-3">
+                                                <div class="offer-details-table">
+                                                    <div class="text-center">
+                                                        <span>Đây là quảng cáo của bạn.</span><!-- react-text: 17 --> <!-- /react-text --><span>Trạng thái</span><!-- react-text: 19 -->: <!-- /react-text --><strong class="text-success">@Model.AdvertisementUser.Status.Text()</strong><br><br>
+                                                        <div class="btn-group btn-group-sm">
+                                                            @{
+                                                                bool isAvailable = false;
+                                                                if (Model.AdvertisementUser.Status == AdvertisementStatusEnum.Available)
+                                                                {
+                                                                    isAvailable = true;
+                                                                }
+                                                            }
+
+                                                            <a class="btn btn-danger button-pending @(isAvailable ? "" : "hidden")" onclick="updateStatusAdvertisement(this, @Model.AdvertisementUser.Id, 2);">
+                                                                <em class="icon-pause"></em>
+                                                                <span class="hidden-xs">Tạm dừng</span>
+                                                            </a>
+
+                                                            <a class="btn btn-success button-available @(!isAvailable ? "" : "hidden")" onclick="updateStatusAdvertisement(this, @Model.AdvertisementUser.Id, 1);">
+                                                                <em class="icon-play"></em>
+                                                                <span class="hidden-xs">Kích hoạt</span>
+                                                            </a>
+
+                                                            <a class="btn btn-default btn-edit" href="/advertisement/edit/@Model.AdvertisementUser.Id">
+                                                                <em class="icon-pencil">
+
+                                                                </em><span class="hidden-xs">Chỉnh sửa</span>
+                                                            </a>
+                                                            <a class="btn btn-default btn-schedule">
+                                                                <em class="icon-stopwatch"></em>
+                                                                <span class="hidden-xs">Hẹn giờ: TẮT</span>
+                                                                <span class="visible-xs-inline">TẮT</span>
+                                                            </a>
+                                                            <a class="btn btn-primary btn-delete" onclick="updateStatusAdvertisement(this, @Model.AdvertisementUser.Id, 5);">
+                                                                <em class="icon-cancel"></em>
+                                                                <span class="hidden-xs">Xóa</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div><hr>
+                                                <div class="panel offer-details">
+                                                    <div class="panel-heading"><span>Thông tin chi tiết quảng cáo</span></div>
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th width="40%">@Model.TransactionName</th>
+                                                                <th><a href="/profile/jetperfect"><u>@Model.AdvertisementUser.AppUser.UserName</u></a></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Giá</td>
+                                                                <td>
+                                                                    <strong class="offer-price text-danger"><span>@(Model.BitcoinPrice.FormatMoney()) VND</span><!-- react-text: 56 -->/<!-- /react-text --><span class="text-btc-color">BTC</span></strong>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Lượng giới hạn:</td>
+                                                                <td>
+                                                                    <span class="currency-amount">
+                                                                        <span class="badge badge-warning btc"><!-- react-text: 63 -->@Model.AdvertisementUser.MaxAmount<!-- /react-text --><!-- react-text: 64 --> <!-- /react-text --><!-- react-text: 65 -->BTC<!-- /react-text --></span><!-- react-text: 66 --> <!-- /react-text -->
+                                                                    </span>
+                                                                    <!-- react-text: 67 --> - <!-- /react-text -->
+                                                                    <span class="currency-amount">
+                                                                        <span class="badge badge-warning btc">
+                                                                            <!-- react-text: 70 -->@Model.AdvertisementUser.MinAmount<!-- /react-text --><!-- react-text: 71 --> <!-- /react-text --><!-- react-text: 72 -->BTC<!-- /react-text -->
+                                                                        </span><!-- react-text: 73 --> <!-- /react-text -->
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr><td>Phương thức thanh toán</td><td><span>@(Model.AdvertisementUser.PaymentMethod.Text())</span><!-- react-text: 78 -->: <!-- /react-text --><span>@Model.AdvertisementUser.Bank.BankDescription</span></td></tr>
+                                                            <tr><td>Vị trí</td><td>@Model.CountryName</td></tr>
+                                                            <tr><td>Thời gian cho phép thanh toán</td><td>@Model.AdvertisementUser.PaymentTime phút</td></tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div><hr>
+                                                <div class="trade-questions">
+                                                    <div id="questions-buy" class="panel-group">
+                                                        <div id="safe-to-sell" class="panel collapsed panel panel-default">
+                                                            <div role="tab" id="safe-to-sell--heading" class="panel-heading">
+                                                                <div class="panel-title"><a class="collapsed" aria-controls="safe-to-sell--body" role="button" href="#">Giao dịch có an toàn không?</a></div>
+                                                            </div>
+                                                            <div class="panel-collapse collapse" id="safe-to-sell--body" role="tabpanel" aria-labelledby="safe-to-sell--heading" aria-expanded="false">
+                                                                <div class="panel-body">
+                                                                    <p>Bitcoin của bạn sẽ được khoá lại và sẽ không được giải phóng cho đến khi bạn đã nhận được thanh toán từ người mua.</p><strong><a href="/escrow_service">Bấm vào đây để đọc thêm về Giao Dịch Đảm Bảo</a></strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </react-offer-details>
+    }
+    else
+    {
+        <section data-reactroot="" class="page-content login-proceed-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="alert alert-danger fade-and-collapsen">
+                            <span>
+                                <span>
+                                    @Model.Message
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+</div>
+
+@section scripts
+    {
+    <script src="~/js/advertisement/edit.js"></script>
+}

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Proceed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    <link href="~/css/wallet.css" rel="stylesheet" />
+}
+
+<div id="wallet">
+    <div class="page_heading">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>ĐĂNG NHẬP / ĐĂNG KÝ</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="box-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-info fade-and-collapsen">
+                    <span>
+                        <span>
+                            Chúng tôi đã gửi liên kết để đăng nhập vào
+                            <strong>@TempData["Email"]</strong> Bấm vào nút bên trong email là xong. Kiểm tra cả hộp thư rác nếu bạn không tìm thấy email trong hộp thư chính
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

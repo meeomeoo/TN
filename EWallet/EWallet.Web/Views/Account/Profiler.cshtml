@@ -1,0 +1,176 @@
+﻿@model EWallet.Service.ViewModels.UserProfileViewModel
+@{
+    ViewBag.Title = "Profile user";
+}
+
+@section css{
+
+    <link href="~/css/profile.css" rel="stylesheet" />
+}
+
+@if (Model != null)
+{
+    <div id="wallet">
+        <div class="page_heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>THÔNG TIN KHÁCH HÀNG</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="profile" class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="profile_detai">
+                    <div class="profile_detai_title">
+                        <span class="detai_summary">Tóm lược về @Model.UserName</span>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Đã giao dịch</td>
+                                    <td class="transaction">
+                                        @foreach (var transaction in Model.Sales)
+                                        {
+                                            <span class="currency-amount">
+                                                <span class="badge badge-warning @transaction.Currency.ToLower()">@Html.FormatValue(@transaction.Amount, "{0:n8}") @transaction.Currency</span>
+                                            </span>
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Số giao dịch thành công</td>
+                                    <td><span class="text-success">@Model.SuccessTransactionsNumber</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Số lượng đối tác khác nhau</td>
+                                    <td><span class="text-success">@Model.PartnersNumber</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Điểm số phản hồi</td>
+                                    <td><span>@Model.FeedBackScore</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Tài khoản được tạo</td>
+                                    <td><strong>@Model.CreatedDate.ToString("dd/MM/yyyy hh:mm")</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Lần truy cập cuối</td>
+                                    <td><strong>@Model.LastVisitTime.ToString("dd/MM/yyyy hh:mm")</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Xác minh nhân thân và cư trú</td>
+                                    <td>
+                                        <strong class="text-danger">@Model.Authenticated</strong>
+                                        @if (!Model.IsAuthenticated)
+                                        {
+                                            <div>
+                                                <a asp-controller="Account" asp-action="Verify">Tải tài liệu lên</a>
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Số điện thoại</td>
+                                    <td>
+                                        <strong class="text-danger">@Model.PhoneNumberConfirmed</strong>
+                                        @if (!Model.IsPhoneConfirmed)
+                                        {
+                                            <div>
+                                                <a id="btnShowPhoneVerifyPhone" data-toggle="modal" data-target="#myModal"> Thêm số điện thoại </a>
+                                            </div>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="js-title-step">Nhập số điện thoại</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div id="divInputPhone">
+                                                                <form>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fas fa-barcode"></i></span>
+                                                                        <input id="phone_number" type="text" class="form-control" name="phone_number" placeholder="Nhập số điện thoại của bạn">
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <div id="divInputOTP">
+                                                                <form>
+                                                                    <div class="input-group">
+                                                                        <label id="lbMessage" class="label label-info"></label>
+                                                                    </div>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fas fa-barcode"></i></span>
+                                                                        <input id="phone_otp" type="text" class="form-control" name="phone_otp" placeholder="Nhập mã xác thực của bạn">
+                                                                    </div>
+                                                                    <div class="mastc_bton">
+                                                                        <button id="btnConfirmPhoneVerify" type="button" class="btn btn-primary">Xác thực</button>
+                                                                        <button id="btnResendOtp" type="button" class="btn btn-warning">(00:16) Chưa nhận được SMS</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" id="btnClose" class="btn btn-default pull-left" data-dismiss="modal">Đóng</button>
+                                                            <button type="button" id="btnPrevious" class="btn btn-default js-btn-step" style="display:none" data-orientation="previous">Trở lại</button>
+                                                            <button type="button" id="btnNext" class="btn btn-success js-btn-step" data-orientation="next">Tiếp tục</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Facebook</td>
+                                    <td><strong>@Model.Facebook</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Twitter</td>
+                                    <td><strong>@Model.Twitter</strong></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="text-center" colspan="2">
+                                        <em class="trust-badge badge badge-danger">@Model.TrustEvaluation</em>
+                                        <em class="speed-badge badge badge-danger">@Model.SellSpeedEvaluation</em>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <h3><strong>PHẢN HỒI VỀ @Model.UserName</strong></h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <h3><span>MUA ETH TỪ @Model.UserName</span></h3>
+        </div>
+        <div class="row">
+            <h3><span>BÁN ETH CHO @Model.UserName</span></h3>
+        </div>
+
+    </div>
+
+
+    if (!Model.IsPhoneConfirmed)
+    {
+        @section scripts{
+            <script src="~/js/profiler/profiler_constants.js"></script>
+            <script src="~/js/profiler/profiler.js"></script>
+        }
+    }
+}
+else
+{
+    <label>Không tìm thấy</label>
+}
+
+

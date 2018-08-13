@@ -1,0 +1,96 @@
+﻿
+.withdrawal {
+    margin: 40px 0;
+}
+
+
+.withdrawal .tab-content h3 {
+    margin: 0 0 20px 0;
+}
+
+
+.withdrawal .tab-content {
+    border-left: 1px solid #3333;
+    border-right: 1px solid #3333;
+    border-bottom: 1px solid #3333;
+}
+
+#plane, #deposit, #poster, #historys {
+    padding: 20px;
+}
+
+.plane_coin, .history_coin, .deposit_coin, .historys_coin {
+    border: 1px solid #3333;
+    border-radius: 5px;
+}
+
+.withdrawal .plane_coin h3, .history_coin h3, .deposit_coin h3{
+    background-color: #ddd;
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.withdrawal .historys_coin h3{
+    background-color: #000000;
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 20px;
+    color:white;
+}
+
+.withdrawal .plane_coin form p {
+    background-color: #5cb85c;
+}
+.withdrawal input#deposit-adree {
+    background-color: white;
+    padding: 20px;
+    font-weight: 600;
+}
+
+.withdrawal .deposit_txt {
+    padding: 5px;
+    text-transform: capitalize;
+    background-color: #ff00002e;
+    border-radius: 5px;
+    line-height: 22px;
+}
+
+.withdrawal .deposit_txt span {
+    font-weight: 600;
+}
+
+button.btn.btn-default.btn-copy-clipboard {
+    position: absolute;
+    top: 0;
+    right: -26px;
+    padding: 9px 13px;
+
+}
+
+.deposit_QR {
+    text-align: center;
+}
+.deposit_QR img {
+    width: 250px;
+    height: 250px;
+}
+.deposit_khg {
+    width: 380px;
+    margin: 0 auto;
+}
+.buttoncolor {
+    background: linear-gradient(to right,#da22ff,#9733ee);
+    border-radius: 40px;
+    color: white;
+    font-weight: bold;
+    line-height: 2.2;
+    padding: 5px 25px;
+    border: 0px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+}
+
+.deposit_now {
+    text-align: center;
+    margin: 20px 0; 
+}

@@ -1,0 +1,104 @@
+﻿#withdraw_vnd .name button {
+    padding: 0 7px;
+}
+
+#withdraw_vnd span.btn.btn-default.btn-file {
+    width: 100%;
+}
+
+#withdraw_vnd input.cf_choosefile {
+    width: 100%;
+}
+
+div#withdraw_vnd {
+    margin: 40px 0;
+}
+
+.withdraw_vnd_messeger p {
+    margin: 0;
+    padding: 10px 25px;
+}
+
+.note_2 p {
+    padding: 35px 25px;
+    margin: 0;
+}
+
+.withdraw_vnd_messeger {
+    line-height: 40px;
+    background-color: #faf8e8;
+    color: #d2b715;
+    border: 1px solid #f3eab2;
+}
+
+.status {
+    text-align: center;
+    line-height: 80px;
+    border: 1px solid #ddd;
+}
+
+    .status p {
+        margin: 0;
+        font-weight: 600;
+        font-size: 24px;
+    }
+
+        .status p span {
+            color: #3d94e6;
+        }
+
+.note {
+    background-color: #faf8e8;
+    color: #d2b715;
+    border: 1px solid #f3eab2;
+    padding: 10px 25px;
+}
+
+.note_2 {
+    border-left: 4px solid #9b59b6;
+    border-bottom: 1px solid #dcdcdc;
+    border-top: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+}
+
+.confirm_detail {
+    border: 1px solid #dcdcdc;
+    padding: 25px 25px;
+    text-align: center;
+}
+
+.introduc {
+    margin-top: 30px;
+}
+
+    .introduc p {
+        line-height: 45px;
+    }
+
+p.confirm_status {
+    display: initial;
+    background-color: #777;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-style: italic;
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.confirm_detail_up .name {
+    text-align: left;
+}
+
+.name p {
+    margin: 0;
+    line-height: 26px;
+}
+
+.confirm_detail_up {
+    margin-bottom: 24px;
+}
+
+#withdraw_vnd .row {
+    margin-bottom: 26px;
+}

@@ -1,0 +1,33 @@
+﻿div#swap {
+    margin-top: 40px;
+}
+.swap_buy {
+    border: 1px solid #6666;
+    font-size: 12px;
+}
+
+.swap_buy h4, .swap_detail h4 {
+    margin: 0;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 7px 0;
+}
+
+
+#swap .swap_buy_bord {
+    margin-top: 20px;
+}
+
+#swap .submit {
+    margin-left: 15px;
+        margin-bottom: 30px;
+}
+
+#swap .swap_detail table {
+    border: 1px solid #6666;
+}
+
+#swap .swap_detail {
+    margin-top: 20px;
+}

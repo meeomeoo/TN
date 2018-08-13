@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewData["Title"] - EWallet.Web</title>
+    <link href="~/css/Montserrat.css" rel="stylesheet" />
+    @*<link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700|Open+Sans" rel="stylesheet">*@
+    <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/lib/material-design-iconic-font/css/material-design-iconic-font.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/styles-457820f8475cf3e460f6.css" rel="stylesheet" />
+    <link href="~/css/currency.css" rel="stylesheet" />
+    <link href="~/css/toastr.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+
+    @RenderSection("css", required: false)
+</head>
+<body>
+
+    <div id="body_content">
+        <div class="site-wrapper ng-scope padding-sticky-header">
+
+            @*<div class="container site-announcement ng-scope">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-warning">
+                        <p>Việc xử lí các lệnh rút VND giá trị lớn đang bị chậm trễ. Chúng tôi đang tiến hành khắc phục.</p>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+            <header class="header header-default">
+                <div class="header-top fix-to-top false">
+                    <div class="container">
+                        <div class="header-top-left"></div>
+                        <div class="header-top-right">
+                            <span><a href="https://eth.remitano.com/vn">Ethereum</a></span>
+                            <span><a href="https://usdt.remitano.com/vn">Tether USDT</a></span>
+                            <span><a href="https://bch.remitano.com/vn">Bitcoin Cash</a></span>
+                            <span>
+                                <div class="dropdown btn-group">
+                                    <a class="dropdown_lang">
+                                        <i class="icon-globe-new"></i>
+                                        <span class="">Việt Nam</span>
+                                        <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu countries-dropdown">
+                                        <li class="">
+                                            <a href="javascript:void(0)">
+                                                <span class="country-label">
+                                                    <i class="flag-icon iti-flag ae"></i>UAE
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:void(0)">
+                                                <span class="country-label">
+                                                    <i class="flag-icon iti-flag ar"></i>Argentina
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- <div class="dropdown btn-group">
+                            <div class="dropdown_lang">
+                                <div class="dropdown-menu countries-dropdown">
+                                    <select name="type" id="type">
+                                        <option class="current-country caret" disabled="disabled" selected="selected" value=""> <i class="icon-globe-new">Acomodates</i></option>
+                                        <option class="country-label" value="Male">2000</option>
+                                        <option class="country-label" value="Female">2001</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div> -->
+                            </span>
+
+                            <span><a class="btn-switch-locale"><span>English</span></a></span>
+                          <partial name="_LoginPartial" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="header-main">
+                    <div class="container">
+                        <nav class="navbar navbar-default fhmm" role="navigation">
+                            <div class="navbar-header">
+                                <div class="logo left-mobile-menu">
+                                    <a class="main_logo" href="/"><div><h1>Remitano</h1><p class="tagline">Mua Bán Bitcoin nhanh chóng và an toàn</p></div></a>
+                                </div>
+                            </div>
+                            <div class="navbar-collapse collapse" id="main-nav">
+                                <ul class="nav navbar-nav">
+                                    <li class="hidden-xs hidden-sm hidden-md">
+                                        <a href="https://itunes.apple.com/us/app/remitano/id1116327021?ls=1&amp;mt=8" rel="noopener noreferrer" target="_blank" style="margin: 0px; padding: 1px;">
+                                            <img height="30px" src="~/images/appstore.png" alt="appstore">
+                                        </a>
+                                    </li>
+                                    <li class="hidden-xs hidden-sm hidden-md">
+                                        <a href="https://play.google.com/store/apps/details?id=com.remitano.remitano&amp;utm_source=global_co&amp;utm_medium=prtnr&amp;utm_content=Mar2515&amp;utm_campaign=PartBadge&amp;pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" rel="noopener noreferrer" target="_blank" style="margin: 0px; padding: 1px;">
+                                            <img height="30px" src="~/images/playstore.png" alt="playstore">
+                                        </a>
+                                    </li>
+                                    <li class="hidden-xs active">
+                                        <a asp-controller="Home" asp-action="Index">Mua bán BTC</a>
+                                    </li>
+                                    <div class="navbar-nav">
+                                        <li class="hidden-xs ">
+                                            <a asp-controller="Wallet" asp-action="Index">Ví BTC</a>
+                                        </li>
+                                        <li class="hidden-xs ">
+                                            <a asp-controller="Account" asp-action="Login">Đăng Nhập / Đăng Ký</a>
+                                        </li>
+                                    </div>
+                                </ul>
+                                <ul class="nav navbar-nav">
+                                    <li class="visible-xs">
+                                        <a href="/vn/"><span>Mua bán BTC</span></a>
+                                    </li>
+                                    <li class="visible-xs ">
+                                        <a asp-controller="Account" asp-action="Login"><i class="icon-user"></i><span>Đăng Nhập / Đăng Ký</span></a>
+                                    </li>
+                                    <li class="visible-xs">
+                                        <a href="https://remitano.com/vn">Bitcoin</a>
+                                    </li>
+                                    <li class="visible-xs">
+                                        <a href="https://eth.remitano.com/vn">Ethereum</a>
+                                    </li>
+                                    <li class="visible-xs">
+                                        <a href="https://usdt.remitano.com/vn">Tether USDT</a>
+                                    </li>
+                                    <li class="visible-xs">
+                                        <a href="https://bch.remitano.com/vn">Bitcoin Cash</a>
+                                    </li>
+                                    <li class="visible-xs">
+                                        <a class="dropdown-toggle"><i class="icon-globe-new"></i><span class="current-country">Việt Nam</span><span class="caret"></span></a>
+                                        <ul class="multi-level dropdown-menu">
+                                            <li><a><span class="country-label"><i class="flag-icon iti-flag ae"></i>UAE</span></a></li>
+                                            <li><a><span class="country-label"><i class="flag-icon iti-flag ar"></i>Argentina</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="visible-xs">
+                                        <a class="btn-switch-locale-xs"><span>English</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            @RenderBody()
+
+        </div>
+
+        <div class="push-footer mobile-app-hidden"></div>
+
+        <footer id="footer" class="footer mobile-app-hidden">
+            <div class="footer-copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-4 col-md-3 col-xs-12 text-center-mobile">
+                            <a class="main_logo" href="#">
+                                <div>
+                                    <h1>Remitano</h1>
+                                </div>
+                            </a>
+                            <div class="company-info-section">
+                                <div class="company-info">
+                                    <strong>© 2014–2018, REMITANO</strong>
+                                    <br>
+                                    <span>Babylon Solutions Limited</span>
+                                    <br>
+                                    <span>Seychelles Reg. No. 168830</span>
+                                </div>
+                                <ul class="contact-list">
+                                    <li>
+                                        <i class="icon icon-mail"></i>
+                                        <span>Email</span>
+                                        :
+                                        <a class="mailto" href="mailto:team@remitano.com">team@remitano.com</a>
+                                    </li>
+                                    <li data-ng-if="!vm.isMobileApp()"><i class="icon icon-chat"></i><a href="">Hỗ trợ trực tuyến</a></li>
+                                    <li><i class="icon icon-lifebuoy"></i><a href="https://support.remitano.com" target="_blank" rel="noopener noreferrer">Những câu hỏi thường gặp</a></li>
+                                    <li><i class="icon icon-blogger"></i><a href="https://blog.remitano.com/vi" target="_blank" rel="noopener noreferrer">Blog</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-md-3 col-xs-12 footer-column">
+                            <h5 class="title">Giới thiệu</h5>
+                            <ul>
+                                <li><a href="/vn/about">Về Chúng Tôi</a></li>
+                                <li><a href="/vn/careers">Tuyển dụng</a></li>
+                                <li>
+                                    <a href="/vn/escrow_service">Giao dịch đảm bảo</a>
+                                </li>
+                                <li><a href="/vn/press">Truyền thông</a></li>
+                                <li><a href="/vn/policy/terms_of_service">Chính sách và Điều khoản</a></li>
+                                <li><a href="/vn/partners">Become our partner</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-md-3 col-xs-12 footer-column">
+                            <h5 class="title">Mạng xã hội</h5>
+                            <ul>
+                                <li><a href="https://www.facebook.com/RemitanoOfficial/" target="_blank" rel="noopener noreferrer"><i aria-hidden="true" class="icon-facebook-squared"></i>Facebook</a></li>
+                                <li><a href="https://twitter.com/remitano" target="_blank" rel="noopener noreferrer"><i class="icon-twitter-squared"></i>Twitter</a></li>
+                                <li><a href="https://www.reddit.com/r/remitano" target="_blank" rel="noopener noreferrer"><i class="icon-reddit-squared"></i>Reddit</a></li>
+                                <li><a href="https://www.linkedin.com/company/Remitano" target="_blank" rel="noopener noreferrer"><i class="icon-linkedin-squared"></i>LinkedIn</a></li>
+                                <li><a href="https://www.youtube.com/channel/UCgKoFPtHOXD77lLQMsGFlWg" target="_blank" rel="noopener noreferrer"><i aria-hidden="true" class="icon-youtube-squared"></i>Youtube</a></li>
+                                <li><a href="http://weibo.com/remitano" target="_blank" rel="noopener noreferrer"><i aria-hidden="true" class="icon-weibo"></i>Weibo</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/js/jquery-3.3.1.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.number.js"></script>
+
+    <script src="~/angular/angular.min.js"></script>
+    <script src="~/angular/angular-route.min.js"></script>
+    <script src="~/angular/angular-animate.min.js"></script>
+    <script src="~/angular/angular-cookies.min.js"></script>
+    <script src="~/js/advertisement/create.js"></script>
+
+    <script src="~/js/toastr.min.js"></script>
+    <script src="~/js/common.js"></script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html> 

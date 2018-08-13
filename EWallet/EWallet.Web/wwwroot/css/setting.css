@@ -1,0 +1,108 @@
+﻿#setting h4.panel-title a {
+    width: 100%;
+    display: block;
+}
+
+div#setting {
+    margin-top: 20px;
+}
+
+#setting .panel-body {
+    text-align: center;
+}
+
+    #setting .panel-body p span {
+        font-weight: 600;
+        color: #f0ad4e;
+    }
+
+#setting .noti_email p, .noti_phone p {
+    text-align: right;
+    margin: 0;
+    line-height: 40px;
+}
+
+
+#setting .noti_email .custom-switch.custom-switch-label-onoff, .noti_phone .custom-switch.custom-switch-label-onoff, .profile .custom-switch.custom-switch-label-onoff {
+    text-align: left;
+}
+
+#setting .noti h3, .phone h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#setting .phone {
+    border-top: 1px solid #ddd;
+}
+
+#setting .noti {
+    margin-bottom: 20px;
+}
+
+#setting .modal-body .input-group {
+    margin-bottom: 20px;
+}
+
+#setting .modal-header {
+    background-color: black;
+    color: white;
+}
+
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+button.btn.btn-default.fanpage_fb {
+    background-color: #3b5998;
+}
+
+button.btn.btn-default.fanpage_fb, button.btn.btn-default.fanpage_tw {
+    color: white;
+    text-shadow: 0 0 0;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+button.btn.btn-default.fanpage_fb i, button.btn.btn-default.fanpage_tw i {
+    margin-right: 5px;
+        font-size: 30px;
+}
+
+
+button.btn.btn-default.fanpage_tw {
+    background-color: #55acee;
+}
+
+.fanpage_fb i, .fanpage_tw i {
+    display: inline-block;
+    float: left;
+}
+.profile, .profile_phoness, .account_status, .fanpage{
+    margin-top: 15px;
+}
+
+
+.fanpage_fb p, .fanpage_tw p {
+    margin: 0;
+    display: inline-block;
+    line-height: 30px;
+}
+
+.magin_0 p {
+    margin: 0;
+}
+
+.red {
+    color: red;
+}
+
+div#collapse7 p {
+    padding: 5px 30px;
+    text-transform: lowercase;
+    line-height: 25px;
+}

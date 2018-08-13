@@ -1,0 +1,168 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    //User đã đăng nhập sẽ sử dụng Template này
+    <main-title class="ng-isolate-scope">
+        <section class="page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="ng-binding">Giao Dịch Của Bạn</h1>
+                        <h1 class="ng-binding ng-hide"></h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main-title>
+
+    <react-flash-container>
+        <div class="container alert-container" data-reactroot="">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="position-stablizer">
+                    </div>
+                    <div class="flash-messages">
+                    </div>
+                    <div></div>
+                    <div class="position-stablizer"></div>
+                </div>
+            </div>
+        </div>
+    </react-flash-container>
+
+    <div class="main ng-scope" role="main" ui-view="">
+        <react-dashboard class="ng-scope">
+            <section class="page-content dashboard-page" data-reactroot="">
+                <div class="container" id="dashboard">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="tabs">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="/vn/dashboard/escrow/trades/active">
+                                            <i class="icon-clock"></i>
+                                            <span class="hidden-xs">Giao dịch đang mở</span>
+                                        </a>
+                                    </li>
+                                    <li class="false">
+                                        <a href="/vn/dashboard/escrow/trades/closed">
+                                            <i class="icon-check"></i>
+                                            <span class="hidden-xs">Giao dịch đã đóng</span>
+                                        </a>
+                                    </li>
+                                    <li class="false">
+                                        <a href="/vn/dashboard/escrow/offers">
+                                            <i class="icon-bullhorn"></i>
+                                            <span class="hidden-xs">Các quảng cáo của tôi</span>
+                                        </a>
+                                    </li>
+                                    <li class="false">
+                                        <a href="/vn/dashboard/referrals">
+                                            <i class="icon-gift"></i>
+                                            <span class="hidden-xs">Danh sách giới thiệu</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="dashboard-escrow-content">
+                                                    <div class="col-lg-12">
+                                                        <div class="trades-list-container">
+                                                            <div class="row">
+                                                                <div class="col-sm-8">
+                                                                    <div class="title-accent">
+                                                                        <h3><span>Giao dịch đang mở</span></h3>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div>
+                                                                    <div class="loading-container text-center">
+                                                                        <div class="loading-bar">
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="content-wrapper">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-12">
+                                                                                <i>Không có giao dịch nào</i>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </react-dashboard>
+    </div>
+}
+else
+{
+    //User chưa đăng nhập sẽ sử dụng Template này
+    <main-title class="ng-isolate-scope">
+        <section class="page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="ng-binding">Ví Bitcoin Remitano</h1>
+                        <h1 class="ng-binding ng-hide"></h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main-title>
+    <react-flash-container>
+        <div class="container alert-container" data-reactroot="">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="position-stablizer">
+                    </div>
+                    <div class="flash-messages">
+                    </div>
+                    <div></div>
+                    <div class="position-stablizer"></div>
+                </div>
+            </div>
+        </div>
+    </react-flash-container>
+    <div class="main ng-scope" role="main" ui-view="">
+        <react-wallet-intro class="ng-scope">
+            <div class="container" data-reactroot="">
+                <div class="row">
+                    <div class="col-md-6">
+                        <figure class="alignnone">
+                            <img alt="coin wallet" src="~/images/coin_wallet.png">
+                        </figure>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>Ví Bitcoin Remitano</h2>
+                        <p>Hãy đến với Wallet Remitano Bitcoin, ví Bitcoin đơn giản nhất trên thế giới.</p>
+                        <span>
+                            Tại sao đây là ví dành cho bạn:
+                            <ol>
+                                <li>Sẵn sàng trong 5 giây: Nhập email của bạn và bắt đầu nhận Bitcoin ngay lập tức</li>
+                                <li>Được thiết kế cho người bắt đầu</li>
+                                <li>Thử nghiệm kĩ càng bởi hơn 100k khách hàng của Remitano</li>
+                                <li><!-- react-text: 19 -->Bảo mật: Tùy chọn bật Authy để bảo vệ <!-- /react-text --><!-- react-text: 20 -->Bitcoin<!-- /react-text --><!-- react-text: 21 --> của bạn<!-- /react-text --></li>
+                            </ol>
+                        </span>
+                        <div class="spacer-sm"></div>
+                        <a class="btn btn-primary" href="/vn/wallet/btc/deposit">Bắt đầu ngay</a>
+                    </div>
+                </div>
+            </div>
+        </react-wallet-intro>
+    </div>
+}
+

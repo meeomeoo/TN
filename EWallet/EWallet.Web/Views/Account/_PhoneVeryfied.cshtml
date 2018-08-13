@@ -1,0 +1,26 @@
+﻿@{string message = ViewBag.VerifyError;}
+<div class="phone-verify-wizard-wrapper">
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <div class="alert alert-danger">
+            <div class="text-center">@message</div>
+        </div>
+    }
+
+    <form name="form" class="form-horizontal add-phone-form">
+        <div class="form-group" id="phone_number">
+            <div class="col-sm-offset-2 col-sm-8">
+                <div class="react-phone-number-input">
+                    <div class="react-phone-number-input__row">
+                        <input class="rrui__input rrui__input-element rrui__input-field react-phone-number-input__phone profile-phone-number-input" id="profile_phone_number" type="tel" placeholder="Nhập số điện thoại" value="" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8 text-center">
+                <button id="btnAddPhone" class="btn-add-phone btn btn-primary" type="button">Tiếp tục</button>
+            </div>
+        </div>
+    </form>
+</div>

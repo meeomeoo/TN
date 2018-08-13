@@ -1,0 +1,137 @@
+﻿@model VerifyImageViewModel
+@{
+    ViewData["Title"] = "Verify";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    <link href="~/css/header.css" rel="stylesheet" />
+    <link href="~/css/wallet.css" rel="stylesheet" />
+    <link href="~/css/account/verify.css" rel="stylesheet" />
+}
+<div id="wallet">
+    <div class="page_heading">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>XÁC MINH TÀI KHOẢN</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model != null)
+{
+
+    <div id="withdraw_vnd">
+        <div class="container">
+            <div class="row">
+                <div class="withdraw_vnd_messeger">
+                    <p>Bạn phải xác minh tài khoản để sử dụng ví VND.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="status">
+                    <p>Trạng thái xác thực: <span>ĐÃ TẢI LÊN @Model.CurrentQuantityOfVerifyImage/@Model.QuantityOfVerifyImage</span></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="note">
+                    <p>Hình ảnh xác minh cần thoả mản các điều kiện sau:</p>
+                    <ul>
+                        <li>Chưa qua chỉnh sửa</li>
+                        <li>Có độ phân giải tối thiểu 2 megapixels</li>
+                        <li>Rõ nét, không bị mờ</li>
+                    </ul>
+                    <p>Hình ảnh xác minh không thoả mãn các điều kiện trên sẽ không bao giờ được chấp nhận.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="note_2">
+                    <p>Quá trình xác minh là ngay lập tức. Nó chỉ mất 2-3 phút để có được tài khoản của bạn được xác nhận.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="confirm">
+                    <h3>Để được xác thực tài khoản, bạn cần tải lên:</h3>
+                    <div class="confirm_detail">
+                        <div class="img">
+                            <img src="~/images/id.png" />
+                        </div>
+
+                        <div class="introduc">
+                            <p style="font-size:18px">TÀI LIỆU ĐỊNH DANH</p>
+                            <p>Vui lòng cung cấp ảnh chụp bản gốc chứng minh thư, hộ chiếu hoặc bằng lái xe của bạn. Đối với chứng minh thư, vui lòng gửi cả 2 bản chụp mặt trước và mặt sau.</p>
+                            <p class="confirm_status">
+                                Chưa gửi
+                            </p>
+                            <div class="confirm_detail_up">
+                                @if (!Model.IsProfileVerified)
+                                {
+                                    <div class="name">
+                                        <p>Tên đầy đủ: @Model.FullName<button class="btn btn-default btn-copy-clipboard" title="Copy vào clipboard" data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></p>
+
+                                        <p>Mã số của CMT/Hộ chiếu/GPLX: @Model.IdNumber<button class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></p>
+                                    </div>
+                                    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title">THÔNG TIN TRÊN CMT/HỘ CHIẾU/GPLX  </h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form id="formUpdateIdNumber">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fas fa-user"></i></span>
+                                                            <input id="txtFullName" type="text" class="form-control" name="txtFullName" value="@Model.FullName" placeholder="Nhập tên đầy đủ trên tài liệu của bạn">
+                                                        </div> <br />
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fas fa-barcode"></i></span>
+                                                            <input id="txtIdNumber" type="text" class="form-control" name="txtIdNumber" value="@Model.IdNumber" placeholder="Nhập mã số trên tài liệu của bạn">
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                                    <button id="btnUpdateIdNumber" type="button" class="btn btn-primary">Cập nhật</button>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                }
+
+
+                            </div>
+                            @if (!Model.IsProfileVerified)
+                            {
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <form id="formUploadImage" enctype="multipart/form-data" asp-action="UploadImage" asp-controller="Upload" method="post">
+                                        <span class="btn btn-default btn-file">
+                                            <input id="fileUpload" name="files" class="cf_choosefile" type="file" title="Chọn một file" multiple />
+                                        </span>
+                                    </form>
+                                    <p style="text-align:center">Chỉ jpg, jpeg, png</p>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts{
+    <script src="~/js/profiler/profiler_constants.js"></script>
+    <script src="~/js/profiler/verify.js"></script>
+
+}

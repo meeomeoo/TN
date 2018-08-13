@@ -1,0 +1,36 @@
+﻿.buymain {
+    margin-top: 40px;
+}
+
+.buymain .panel-heading {
+    background-color: #2f2f2f;
+    color: white;
+
+}
+
+.buymain .panel.offer-details {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.buymain span.badge.badge-warning.eth {
+    background-color: #0a5483;
+}
+
+.buymain .quest1 {
+    color: #6d6d6d !important;
+    font-size: 13px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+}
+
+.buymain buyq1, #buyq2 {
+    color: #333;
+    font-size: 14px;
+}
+
+.buymain div#safe-to-buy p {
+    padding: 16px;
+}
+

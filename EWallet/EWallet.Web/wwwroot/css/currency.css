@@ -1,0 +1,515 @@
+﻿.currency-CDF:after {
+    content: 'CDF';
+}
+
+.currency-CDF:before {
+    content: ' ';
+}
+
+.currency-CHF:after {
+    content: 'CHF';
+}
+
+.currency-CHF:before {
+    content: ' ';
+}
+
+.currency-USD:after {
+    content: 'USD';
+}
+
+.currency-USD:before {
+    content: ' ';
+}
+
+.currency-PLN:after {
+    content: 'PLN';
+}
+
+.currency-PLN:before {
+    content: ' ';
+}
+
+.currency-EUR:after {
+    content: 'EUR';
+}
+
+.currency-EUR:before {
+    content: ' ';
+}
+
+.currency-CFA:after {
+    content: 'CFA';
+}
+
+.currency-CFA:before {
+    content: ' ';
+}
+
+.currency-ZMW:after {
+    content: 'ZMW';
+}
+
+.currency-ZMW:before {
+    content: ' ';
+}
+
+.currency-PEN:after {
+    content: 'PEN';
+}
+
+.currency-PEN:before {
+    content: ' ';
+}
+
+.currency-BOB:after {
+    content: 'BOB';
+}
+
+.currency-BOB:before {
+    content: ' ';
+}
+
+.currency-DZD:after {
+    content: 'DZD';
+}
+
+.currency-DZD:before {
+    content: ' ';
+}
+
+.currency-ARS:after {
+    content: 'ARS';
+}
+
+.currency-ARS:before {
+    content: ' ';
+}
+
+.currency-XAF:after {
+    content: 'XAF';
+}
+
+.currency-XAF:before {
+    content: ' ';
+}
+
+.currency-NOK:after {
+    content: 'NOK';
+}
+
+.currency-NOK:before {
+    content: ' ';
+}
+
+.currency-BND:after {
+    content: 'BND';
+}
+
+.currency-BND:before {
+    content: ' ';
+}
+
+.currency-KRW:after {
+    content: 'KRW';
+}
+
+.currency-KRW:before {
+    content: ' ';
+}
+
+.currency-EUR:after {
+    content: 'EUR';
+}
+
+.currency-EUR:before {
+    content: ' ';
+}
+
+.currency-CAD:after {
+    content: 'CAD';
+}
+
+.currency-CAD:before {
+    content: ' ';
+}
+
+.currency-ZAR:after {
+    content: 'ZAR';
+}
+
+.currency-ZAR:before {
+    content: ' ';
+}
+
+.currency-RWF:after {
+    content: 'RWF';
+}
+
+.currency-RWF:before {
+    content: ' ';
+}
+
+.currency-NZD:after {
+    content: 'NZD';
+}
+
+.currency-NZD:before {
+    content: ' ';
+}
+
+.currency-CNY:after {
+    content: 'CNY';
+}
+
+.currency-CNY:before {
+    content: ' ';
+}
+
+.currency-TZS:after {
+    content: 'TZS';
+}
+
+.currency-TZS:before {
+    content: ' ';
+}
+
+.currency-USD:after {
+    content: 'USD';
+}
+
+.currency-USD:before {
+    content: ' ';
+}
+
+.currency-UAH:after {
+    content: 'UAH';
+}
+
+.currency-UAH:before {
+    content: ' ';
+}
+
+.currency-RUB:after {
+    content: 'RUB';
+}
+
+.currency-RUB:before {
+    content: ' ';
+}
+
+.currency-USD:after {
+    content: 'USD';
+}
+
+.currency-USD:before {
+    content: ' ';
+}
+
+.currency-MXN:after {
+    content: 'MXN';
+}
+
+.currency-MXN:before {
+    content: ' ';
+}
+
+.currency-TWD:after {
+    content: 'TWD';
+}
+
+.currency-TWD:before {
+    content: ' ';
+}
+
+.currency-USD:after {
+    content: 'USD';
+}
+
+.currency-USD:before {
+    content: ' ';
+}
+
+.currency-SGD:after {
+    content: 'SGD';
+}
+
+.currency-SGD:before {
+    content: ' ';
+}
+
+.currency-GBP:after {
+    content: 'GBP';
+}
+
+.currency-GBP:before {
+    content: ' ';
+}
+
+.currency-JPY:after {
+    content: 'JPY';
+}
+
+.currency-JPY:before {
+    content: ' ';
+}
+
+.currency-KES:after {
+    content: 'KES';
+}
+
+.currency-KES:before {
+    content: ' ';
+}
+
+.currency-THB:after {
+    content: 'THB';
+}
+
+.currency-THB:before {
+    content: ' ';
+}
+
+.currency-IDR:after {
+    content: 'IDR';
+}
+
+.currency-IDR:before {
+    content: ' ';
+}
+
+.currency-LAK:after {
+    content: 'LAK';
+}
+
+.currency-LAK:before {
+    content: ' ';
+}
+
+.currency-IRR:after {
+    content: 'IRR';
+}
+
+.currency-IRR:before {
+    content: ' ';
+}
+
+.currency-GHS:after {
+    content: 'GHS';
+}
+
+.currency-GHS:before {
+    content: ' ';
+}
+
+.currency-PHP:after {
+    content: 'PHP';
+}
+
+.currency-PHP:before {
+    content: ' ';
+}
+
+.currency-BYN:after {
+    content: 'BYN';
+}
+
+.currency-BYN:before {
+    content: ' ';
+}
+
+.currency-OMR:after {
+    content: 'OMR';
+}
+
+.currency-OMR:before {
+    content: ' ';
+}
+
+.currency-EUR:after {
+    content: 'EUR';
+}
+
+.currency-EUR:before {
+    content: ' ';
+}
+
+.currency-PKR:after {
+    content: 'PKR';
+}
+
+.currency-PKR:before {
+    content: ' ';
+}
+
+.currency-ILS:after {
+    content: 'ILS';
+}
+
+.currency-ILS:before {
+    content: ' ';
+}
+
+.currency-DKK:after {
+    content: 'DKK';
+}
+
+.currency-DKK:before {
+    content: ' ';
+}
+
+.currency-COP:after {
+    content: 'COP';
+}
+
+.currency-COP:before {
+    content: ' ';
+}
+
+.currency-QAR:after {
+    content: 'QAR';
+}
+
+.currency-QAR:before {
+    content: ' ';
+}
+
+.currency-NAD:after {
+    content: 'NAD';
+}
+
+.currency-NAD:before {
+    content: ' ';
+}
+
+.currency-AUD:after {
+    content: 'AUD';
+}
+
+.currency-AUD:before {
+    content: ' ';
+}
+
+.currency-EUR:after {
+    content: 'EUR';
+}
+
+.currency-EUR:before {
+    content: ' ';
+}
+
+.currency-SEK:after {
+    content: 'SEK';
+}
+
+.currency-SEK:before {
+    content: ' ';
+}
+
+.currency-AED:after {
+    content: 'AED';
+}
+
+.currency-AED:before {
+    content: ' ';
+}
+
+.currency-MYR:after {
+    content: 'MYR';
+}
+
+.currency-MYR:before {
+    content: ' ';
+}
+
+.currency-TRY:after {
+    content: 'TRY';
+}
+
+.currency-TRY:before {
+    content: ' ';
+}
+
+.currency-MMK:after {
+    content: 'MMK';
+}
+
+.currency-MMK:before {
+    content: ' ';
+}
+
+.currency-NPR:after {
+    content: 'NPR';
+}
+
+.currency-NPR:before {
+    content: ' ';
+}
+
+.currency-VND:after {
+    content: 'VND';
+}
+
+.currency-VND:before {
+    content: ' ';
+}
+
+.currency-UGX:after {
+    content: 'UGX';
+}
+
+.currency-UGX:before {
+    content: ' ';
+}
+
+.currency-EUR:after {
+    content: 'EUR';
+}
+
+.currency-EUR:before {
+    content: ' ';
+}
+
+.currency-BRL:after {
+    content: 'BRL';
+}
+
+.currency-BRL:before {
+    content: ' ';
+}
+
+.currency-INR:after {
+    content: 'INR';
+}
+
+.currency-INR:before {
+    content: ' ';
+}
+
+.currency-NGN:after {
+    content: 'NGN';
+}
+
+.currency-NGN:before {
+    content: ' ';
+}
+
+.currency-amount > .badge.btc {
+    background-color: #9b59b6;
+}
+
+.currency-amount > .badge.eth {
+    background-color: #0a5483;
+}
+
+.currency-amount > .badge.usdt {
+    background-color: #00a17b;
+}
+
+.currency-amount > .badge.bch {
+    background-color: #478558;
+}
+
+.currency-amount > .badge.swap {
+    background-color: #ea6348;
+}

@@ -1,0 +1,33 @@
+﻿{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "font-awesome@4.7.0",
+      "destination": "wwwroot/lib/font-awesome",
+      "files": [
+        "css/font-awesome.css",
+        "fonts/fontawesome-webfont.eot",
+        "fonts/fontawesome-webfont.svg",
+        "fonts/fontawesome-webfont.ttf",
+        "fonts/fontawesome-webfont.woff",
+        "fonts/fontawesome-webfont.woff2",
+        "fonts/FontAwesome.otf"
+      ],
+      "provider": "cdnjs"
+    },
+    {
+      "library": "material-design-iconic-font@2.2.0",
+      "destination": "wwwroot/lib/material-design-iconic-font",
+      "files": [
+        "css/material-design-iconic-font.css",
+        "fonts/Material-Design-Iconic-Font.eot",
+        "fonts/Material-Design-Iconic-Font.svg",
+        "fonts/Material-Design-Iconic-Font.ttf",
+        "fonts/Material-Design-Iconic-Font.woff",
+        "fonts/Material-Design-Iconic-Font.woff2"
+      ],
+      "provider": "cdnjs"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+﻿.header .container {
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    background-color: #2f2f2f;
+}
+
+
+    .header .menu-top li {
+        float: left;
+        list-style-type: none;
+    }
+
+    .header .menu-top a {
+        padding: 0px 10px;
+        font-size: 10px;
+        color: white;
+        text-transform: uppercase;
+    }
+
+    .header .menu-top {
+        display: inline-block;
+        float: right;
+    }
+
+        .header .menu-top ul {
+            float: left;
+            margin: 0;
+        }
+
+        .header .login, .header .menu-top li a {
+            line-height: 44px;
+        }
+
+.header_main {
+    background: #ececec;
+    position: relative;
+}
+
+    .header_main:before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 100px;
+        max-height: 100%;
+        background-image: linear-gradient(180deg,#fff 0,hsla(0,0%,100%,0));
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffffff",endColorstr="#00ffffff",GradientType=0);
+    }
+
+    .header_main p {
+        color: #a3a3a3;
+        margin: 0;
+        font-size: 0.7em;
+    }
+
+    .header_main h1 {
+        font-weight: 400;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    .header_main .logo_left {
+        padding: 24px 0;
+    }
+
+        .header_main .logo_left h1:first-letter {
+            color: #0a5483;
+        }
+
+    .header_main div#header nav {
+        margin: 0;
+    }
+div#header li a {
+    line-height: 68px;
+    text-transform: uppercase;
+        color: #656464;
+    font-weight: 600;
+}
+
+.header_main div#header li a img {
+    height: 30px;
+}

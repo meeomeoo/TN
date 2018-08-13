@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewData["Title"] - EWallet</title>
+    <link href="~/css/Montserrat.css" rel="stylesheet" />
+    @*<link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700|Open+Sans" rel="stylesheet">*@
+    @*<link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link href="~/lib/material-design-iconic-font/css/material-design-iconic-font.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/css/header.css" rel="stylesheet" />
+    <link href="~/css/wallet.css" rel="stylesheet" />
+    <link href="~/css/currency.css" rel="stylesheet" />
+    <link href="~/css/toastr.min.css" rel="stylesheet" />
+    <link href="~/css/styles-457820f8475cf3e460f6.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    @RenderSection("css", required: false)
+</head>
+<body>
+<div id="loading">
+    <div class="loading-img">
+        <div>
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </div>
+        <div class="text-left">
+            <span class="text-loading">Please wait</span>
+        </div>
+    </div>
+</div>
+
+    <div class="header">
+        <div class="container">
+
+            <div class="menu-top">
+                <ul>
+                    <li>
+                        <a href="#">bitcoin</a>
+                    </li>
+                    <li>
+                        <a href="#">azx</a>
+                    </li>
+                    <li>
+                        <a href="#">xzv</a>
+                    </li>
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+
+    </div>
+    <div class="header_main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="logo">
+                        <div class="logo_left">
+                            <h1>
+                                <a href="/">Remilato</a>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="example">
+                        <div id="header">
+                            <nav class="navbar navbar-right">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+
+                                </div>
+
+                                <div class="navbar-collapse collapse" id="menu">
+                                    <ul class="nav navbar-nav">
+                                        <li>
+                                            <a href="">
+                                                <img src="~/images/appstore.png" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <img src="~/images/playstore.png" />
+                                            </a>
+                                        </li>
+                                        <li><a asp-controller="" asp-action="">Mua bán</a></li>
+                                        <li><a asp-controller="" asp-action="">Bảng điều khiển</a></li>
+                                        <li><a asp-controller="" asp-action="">Ví ...</a></li>
+                                        <li><a asp-controller="" asp-action="">Ví VNĐ</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    @RenderBody()
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                    <h1 class="upcase">Remitano</h1>
+                    <div class="company-info-section">
+                        <div class="company-info">
+                            <strong>© 2014–2018, REMITANO</strong>
+                            <br>
+                            <span>Babylon Solutions Limited</span>
+                            <br>
+                            <span>Seychelles Reg. No. 168830</span>
+                        </div>
+                        <ul class="contact-list">
+                            <li>
+                                <i class="far fa-envelope"></i>
+                                <span>Email</span>
+                                <a class="mailto" href="">team@remitano.com</a>
+                            </li>
+                            <li>
+                                <i class="far fa-comments"></i>
+                                <a href="">Hỗ trợ trực tuyến</a>
+                            </li>
+                            <li>
+                                <i class="far fa-question-circle"></i>
+                                <a href="https://support.remitano.com" target="_blank" rel="noopener noreferrer">Những câu hỏi thường gặp</a>
+                            </li>
+                            <li>
+                                <i class="fab fa-blogger"></i>
+                                <a href="" target="_blank" rel="noopener noreferrer">Blog</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                    <h5 class="title">Giới thiệu</h5>
+                    <ul>
+                        <li>
+                            <a href="">Về Chúng Tôi</a>
+                        </li>
+                        <li>
+                            <a href="">Tuyển dụng</a>
+                        </li>
+                        <li>
+                            <a href="">Giao dịch đảm bảo</a>
+                        </li>
+                        <li>
+                            <a href="">Truyền thông</a>
+                        </li>
+                        <li>
+                            <a href="">Chính sách và Điều khoản</a>
+                        </li>
+                        <li>
+                            <a href="">Become our partner</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                    <h5 class="title">MẠNG XÃ HỘI</h5>
+                    <ul>
+                        <li>
+                            <i class="fab fa-facebook"></i>
+                            <a href="">Facebook</a>
+                        </li>
+                        <li>
+                            <i class="fab fa-twitter-square"></i>
+                            <a href="">Twitter</a>
+                        </li>
+                        <li>
+                            <i class="fab fa-reddit"></i>
+                            <a href="">Reddit</a>
+                        </li>
+                        <li>
+                            <i class="fab fa-linkedin"></i>
+                            <a href="">LinkedIn</a>
+                        </li>
+                        <li>
+                            <i class="fab fa-youtube-square"></i>
+                            <a href="">Youtube</a>
+                        </li>
+                        <li>
+                            <i class="fab fa-weibo"></i>
+                            <a href="">Weibo</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="~/js/action-url.js"></script>
+    <script src="~/js/jquery-3.3.1.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.number.js"></script>
+    <script src="~/js/constants.js"></script>
+    <script src="~/angular/angular.min.js"></script>
+    <script src="~/angular/angular-route.min.js"></script>
+    <script src="~/angular/angular-animate.min.js"></script>
+    <script src="~/angular/angular-cookies.min.js"></script>
+    <script src="~/js/advertisement/create.js"></script>
+
+    <script src="~/js/toastr.min.js"></script>
+    <script src="~/js/common.js"></script>
+    @*<script src="~/js/app-profiler.js"></script>*@
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html> 

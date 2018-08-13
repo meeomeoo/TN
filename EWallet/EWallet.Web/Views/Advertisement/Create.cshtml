@@ -1,0 +1,959 @@
+﻿@using EWallet.Data.Enums
+@using EWallet.Utilities.Extensions
+@{
+    ViewData["Title"] = "Tạo quảng cáo mới";
+    var lstReferenceExchange = Enum.GetValues(typeof(ReferenceExchangeEnum)).Cast<ReferenceExchangeEnum>();
+    var lstPaymentMethod = Enum.GetValues(typeof(PaymentMethodEnum)).Cast<PaymentMethodEnum>();
+}
+
+@section css{
+    <link href="~/css/wallet.css" rel="stylesheet" />
+    <link href="~/css/create_ad.css" rel="stylesheet" />
+}
+
+<div id="wallet">
+    <div class="page_heading">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>CREATE NEW ADVERTISEMENT</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div ng-app="AdvertisementModule" id="create_ad" class="ng-scope">
+    <div ng-controller="CreateController" class="container">
+        <div>{{Id}}</div>
+    <input type="hidden" id="adsid" value="@ViewBag.AdvertisementId" />
+        <div style="position: absolute; top: 0; right: 0; z-index: 99999;z-index: 99999;
+                                      background: #00e4ff;">
+            @*<div class="form-group">
+                    <label>BitcoinPriceMaker</label>
+                    <input ng-model="BitcoinPriceMaker" ng-init="BitcoinPriceMaker=@(Model.UsdRate * Model.ReferenceExchange)" type="text">
+                </div>
+                <div class="form-group">
+                    <label>ReferenceExchange</label>
+                    <input ng-model="ReferenceExchange" ng-init="ReferenceExchange=@(Model.ReferenceExchange)" type="text">
+                </div>
+                <div class="form-group">
+                    <label>UsdRate</label>
+                    <input ng-model="UsdRate" ng-init="UsdRate=@(Model.UsdRate)" type="text">
+                </div>
+                <div class="form-group">
+                    <label>Fee</label>
+                    <input ng-model="Fee" ng-init="Fee=@(Model.Fee)" type="text">
+                </div>
+                <div class="form-group">
+                    <label>BitcoinPriceTaker</label>
+                    <input ng-model="BitcoinPriceTaker" ng-init="BitcoinPriceTaker=(BitcoinPriceMaker-(BitcoinPriceMaker*Fee))" type="text">
+                </div>*@
+        </div>
+
+        <div class="row">
+            <div class="kng_all col-md-12">
+                <div class="ad_defau_detail">
+                    @*<button ng-click="changeIsDetail()" class="ad_detail" type="button">{{TextDetail}}</button>*@
+                    <div data-toggle="buttons" class="btn-group btn-group-sm">
+                        <label type="button" ng-click="changeIsDetail()" class="btn {{!IsDetail ? 'btn-primary' : 'btn-default'}}">
+                            <input type="radio" name="mode" autocomplete="off" value="basic">
+                            Cơ bản
+                        </label>
+                        <label type="button" ng-click="changeIsDetail()" class="btn {{IsDetail ? 'btn-primary' : 'btn-default'}}">
+                            <input type="radio" name="mode" autocomplete="off" value="detailed">
+                            Chi tiết
+                        </label>
+                    </div>
+                </div>
+                <form class="ng-pristine ng-valid">
+                    <div class="row">
+                        <div class="col-md-12 offer-details">
+                            <h3>I WANT TO</h3>
+                            <ul class="nav nav-pills">
+                                <li class="active">
+                                    <a data-toggle="pill" href="#buy_coin" ng-click="changeAdvertisementType(1);">Buy Bitcoin</a>
+                                </li>
+                                <li>
+                                    <a data-toggle="pill" href="#sell_coin"  ng-click="changeAdvertisementType(2);">Sell Bitcoin</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="buy_coin" class="tab-pane fade in active">
+                                    <!--Mua Bitcoin-->
+                                    <div class="kng_price">
+                                        <div class="col-md-12">
+                                            <h4>Price</h4>
+                                            <div class="allkhung">
+
+                                                <div class="row">
+                                                    <div class="buy_coin_price">
+                                                        <div class="col-md-7">
+                                                            <div class="col-sm-5 col-xs-7"><label>bitUSD Price (<span id="abcd"></span>)</label></div>
+
+                                                            <div class="col-sm-4 text-right col-xs-5" ng-show="anhien1">
+                                                                <strong><span>{{UsdRate | number:0}}</span> VND / bitUSD</strong>
+                                                            </div>
+
+                                                            <div class="col-sm-3 text-left col-xs-12 text-xs-right" ng-show="anhien1">
+                                                                <a class="btn-change" ng-click="changeOne()">Change</a>
+                                                            </div>
+                                                            <div class="col-md-12" ng-hide="anhien1">
+                                                                <div class="input-group {{!IsValidUsdRate ? 'has-error' : ''}}">
+                                                                    <input type="text" class="form-control numeric" ng-model="UsdRate" ng-change="changeUsdRate()">
+                                                                    <span class="input-group-addon">VND</span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="col-md-5">
+                                                            <span class="explanation">Price of 1 bitUSD in VND</span>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <!--Giá-->
+                                                <div class="row">
+                                                    <div class="price_real">
+                                                        <div class="col-md-7">
+                                                            <div class="col-sm-5 col-xs-7"><label>Bitcoin price that you pay</label></div>
+                                                            <div class="col-sm-4 text-right col-xs-5">
+                                                                <strong><span>{{BitcoinPriceMaker | number:0}}</span> VND / BTC</strong>
+                                                            </div>
+                                                            <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-5">
+                                                            <span class="explanation">This is the Bitcoin price at current Bitstamp (Blockchain) rate ({{ReferenceExchange | number:0}}). The price will fluctuate when Bitstamp (Blockchain) rate changes.</span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <!--Giá thực trả-->
+                                                <div class="price_hide" ng-show="IsDetail">
+                                                    <div class="row">
+                                                        <div class="price_hide1">
+                                                            <div class="col-md-7">
+                                                                <div class="col-sm-5 col-xs-7">
+                                                                    <label>
+                                                                        Bitcoin price that sellers see
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-4 text-right col-xs-5">
+                                                                    <strong>{{BitcoinPriceTaker | number:0}} VND / BTC</strong>
+                                                                </div>
+                                                                <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-5">
+                                                                <span class="explanation">The price has been accounted with trading fee (buyer pay the fee).</span>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div> <!--Giá Bitcoin người bán thấy-->
+
+                                                    <div ng-show="IsDetail" class="row">
+                                                        <div class="price_hide8">
+                                                            <div class="col-md-7">
+                                                                <div class="col-sm-5 col-xs-7"><label>Currency</label></div>
+                                                                <div class="col-sm-4 text-right col-xs-5" ng-hide="showTwo">
+                                                                    <strong>VND</strong>
+                                                                </div>
+                                                                <div class="col-sm-3 text-left col-xs-12 text-xs-right" ng-hide="showTwo">
+                                                                    <a class="btn-change" ng-click="changeTwo()">Change</a>
+                                                                </div>
+
+                                                                <div class="col-md-12" ng-show="showTwo">
+                                                                    <select class="form-control" ng-model="CurrencySelected" ng-options="item.currencyCode for item in ListCurrency track by item.id" ng-change="changeCurrency();"></select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-5">
+                                                                <span class="explanation">Currency in exchange for BTC.</span>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div> <!--Đơn vị tiền tệ-->
+
+                                                    <div class="row" ng-show="IsDetail">
+                                                        <div class="price_hide2">
+                                                            <div class="col-md-7">
+                                                                <div class="col-sm-5 col-xs-7"><label>Reference Exchange</label></div>
+                                                                <div class="col-sm-4 text-right col-xs-5" ng-hide="showThree">
+                                                                    <strong ng-hide="anhien3">Blockchain</strong>
+                                                                </div>
+                                                                <div class="col-sm-3 text-left col-xs-12 text-xs-right" ng-hide="showThree">
+                                                                    <a class="btn-change" ng-click="changeThree()">Change</a>
+                                                                </div>
+                                                                <div class="col-md-12" ng-show="showThree">
+                                                                    <div style="display: block" class="input-group">
+                                                                        <select class="form-control" name="reference_exchange" id="ReferenceExchange">
+                                                                            @{
+                                                                                foreach (var item in lstReferenceExchange)
+                                                                                {
+                                                                                    <option value="@item.Value()">@item.Text()</option>
+                                                                                }
+                                                                            }
+                                                                        </select>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-5">
+                                                                <span class="explanation">Exchange that will be used to update your advertisement price.</span>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div> <!-- Sàn giao dịch tham khảo -->
+
+                                                    <div class="row" ng-show="IsDetail">
+                                                        <div class="price_hide3">
+                                                            <div class="col-md-7">
+                                                                <div class="col-sm-5 col-xs-7">
+                                                                    <label>Maximum Bitcoin price</label>
+                                                                </div>
+                                                                <div class="col-sm-4 text-right col-xs-5" ng-hide="showFour">
+                                                                    <strong></strong>
+                                                                </div>
+                                                                <div class="col-sm-3 text-left col-xs-12 text-xs-right" ng-hide="showFour">
+                                                                    <a class="btn-change" ng-click="changeFour()">Change</a>
+                                                                </div>
+                                                                <div class="col-md-12" ng-show="showFour">
+                                                                    <div class="input-group {{!IsValidCoinPriceLimit ? 'has-error' : ''}}">
+                                                                        <input ng-model="CoinPriceLimit" type="text" class="form-control numeric" ng-change="changeCoinPriceLimit();">
+                                                                        <span class="input-group-addon">VND</span>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-5">
+                                                                <span class="explanation">The maximum price you are willing to pay for 1 Bitcoin (base on VND).</span>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div> <!-- Giá Bitcoin tối đa -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!--giá-->
+
+                                    <div ng-show="IsDetail" class="col-md-12">
+                                        <h4>LIMITATION</h4>
+
+                                        <div class="allkhung">
+                                            <div class="row">
+                                                <div>
+                                                    <div class="col-md-7">
+                                                        <div class="col-sm-5 col-xs-7"><label>Minimum BTC amount</label></div>
+                                                        <div class="col-sm-4 text-right col-xs-5" ng-hide="showFive">
+                                                            <strong>{{MinAmount}} BTC</strong>
+                                                        </div>
+                                                        <div class="col-sm-3 text-left col-xs-12 text-xs-right" ng-hide="showFive">
+                                                            <a class="btn-change" ng-click="changeFive()">Change</a>
+                                                        </div>
+                                                        <div class="col-md-12" ng-show="showFive">
+                                                            <div class="input-group {{(MinAmount < MinMinAmount || MinAmount > MaxMinAmount) ? 'has-error' : ''}}">
+                                                                <input ng-model="MinAmount" class="form-control" type="number" min="0">
+                                                                <span class="input-group-addon">BTC</span>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-5">
+                                                        <span class="explanation">Minimum BTC amount in one trade. (at least 0.001 BTC).</span>
+                                                    </div>
+
+                                                </div>
+
+                                            </div> <!-- Số BTC tối thiểu -->
+
+                                            <div class="row">
+                                                <div>
+                                                    <div class="col-md-7">
+                                                        <div class="col-sm-5 col-xs-7"><label>Maximum BTC amount</label></div>
+                                                        <div class="col-sm-4 text-right col-xs-5" ng-hide="showSix">
+                                                            <strong>{{MaxAmount}} BTC</strong>
+                                                        </div>
+                                                        <div class="col-sm-3 text-left col-xs-12 text-xs-right" ng-hide="showSix">
+                                                            <a class="btn-change" ng-click="changeSix()">Change</a>
+                                                        </div>
+
+                                                        <div class="col-md-12" ng-show="showSix">
+                                                            <div class="input-group  {{(MaxAmount < MinAmount || MaxAmount > MaxMinAmount) ? 'has-error' : ''}}">
+                                                                <input ng-model="MaxAmount" class="form-control"  type="number" min="0">
+                                                                <span class="input-group-addon">BTC</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-5">
+                                                        <span class="explanation">Total amount of BTC that you are going to buy.</span>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- Số BTC tối đa -->
+
+                                            <div class="row">
+                                                <div>
+                                                    <div class="col-md-7">
+                                                        <div class="col-sm-5 col-xs-7"><label>Location</label></div>
+                                                        <div class="col-sm-4 text-right col-xs-5" ng-hide="showSeven">
+                                                            <strong>{{CountrySelected.name}}</strong>
+                                                        </div>
+                                                        <div class="col-sm-3 text-left col-xs-12 text-xs-right" ng-hide="showSeven">
+                                                            <a class="btn-change" ng-click="changeSeven()">Change</a>
+                                                        </div>
+
+                                                        <div class="col-md-12" ng-show="showSeven">
+                                                            <div style="display: block" class="input-group">
+                                                                <select class="form-control" ng-model="CountrySelected"
+                                                                        ng-options="item.name for item in ListCountry track by item.id"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-5">
+                                                        <span class="explanation"></span>
+                                                    </div>
+
+                                                </div>
+
+                                            </div> <!-- Vị trí -->
+
+                                        </div>
+                                    </div> <!--GIỚI HẠN-->
+
+                                    <div class="kng_pay">
+                                        <div class="col-md-12">
+                                            <h4>PAYMENT INFORMATIONS</h4>
+                                            <div class="allkhung">
+                                                <div class="row">
+                                                    <div>
+                                                        <div class="col-md-7">
+                                                            <div class="col-sm-5 col-xs-7"><label>Payment method</label></div>
+                                                            <div class="col-sm-4 text-right col-xs-5">
+                                                                <strong>Bank transfer</strong>
+                                                            </div>
+                                                            @*<div class="col-sm-3 text-left col-xs-12 text-xs-right">
+                                                                    <a class="btn-change" >Change</a>
+                                                                </div>*@
+                                                            <div class="col-md-12">
+                                                                <div style="display: block" class="input-group">
+                                                                    <select class="form-control" name="payment_method" id="PaymentMethod">
+                                                                        @{
+                                                                            foreach (var item in lstPaymentMethod)
+                                                                            {
+                                                                                <option value="@item.Value()">@item.Text()</option>
+                                                                            }
+                                                                        }
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-5">
+                                                            <span class="explanation"></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div> <!-- Phương thức thanh toán -->
+
+                                                <div class="price_hide" ng-show="IsDetail">
+                                                    <div class="row">
+                                                        <div class="price_hide1">
+                                                            <div class="col-md-7">
+                                                                <div class="col-sm-5 col-xs-7">
+                                                                    <label>Payment window</label>
+                                                                </div>
+                                                                <div class="col-sm-4 text-right col-xs-5" ng-hide="showEight">
+                                                                    <strong ng-hide="anhien10">15 minutes</strong>
+                                                                </div>
+                                                                <div class="col-sm-3 text-left col-xs-12 text-xs-right" ng-hide="showEight">
+                                                                    <a class="btn-change" ng-click="changeEight()">Change</a>
+                                                                </div>
+                                                                <div class="col-md-12" ng-show="showEight">
+                                                                    <div style="display: block" class="input-group">
+                                                                        <select class="form-control" name="payment_time" id="PaymentTime">
+                                                                            <option value="15" selected="">15 phút</option>
+                                                                            <option value="30">30 phút</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-5">
+                                                                <span class="explanation">If buyer does not pay within the payment time, the trade will be cancelled automatically.</span>
+                                                            </div>
+                                                        </div>
+                                                    </div> <!--Thời gian cho phép thanh toán-->
+                                                </div>
+
+                                                <div class="price_real">
+                                                    <div class="col-md-12">
+                                                        <label>Bank name</label>
+                                                    </div>
+
+                                                    <div class="col-md-7">
+                                                        <select class="form-control" ng-model="BankSelected"
+                                                                ng-options="item.bankName for item in ListBank track by item.id"></select>
+                                                    </div>
+
+                                                </div><!-- Tên ngân hàng -->
+
+
+
+                                            </div>
+                                        </div>
+                                    </div> <!-- thông tin thanh toán -->
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <button type="button" class="btn-save-offer btn btn-primary" ng-click="saveBuyAdvertisement();">{{Id > 0 ? "Update" : "Create"}}</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div id="sell_coin" class="tab-pane fade">
+                                    <!-- bán Bitcoin-->
+                                    <div class="kng_price">
+                                        <div class="col-md-12">
+                                            <h4>Giá</h4>
+
+                                            <div class="allkhung">
+                                                <div class="row">
+                                                    <div class="buy_coin_price">
+                                                        <div class="col-md-7">
+                                                            <div class="col-sm-5 col-xs-7"><label>Giá bitUSD</label></div>
+                                                            <div class="col-sm-4 text-right col-xs-5">
+                                                                <strong ng-hide="anhien11">23.067 VND / bitUSD</strong>
+                                                            </div>
+                                                            <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+                                                                <input onclick="this.disabled = true" type="checkbox" ng-model="anhien11" class="btn-change ng-pristine ng-untouched ng-valid ng-empty"> Change
+                                                            </div>
+
+                                                            <div ng-show="anhien11" class="col-md-12 ng-hide">
+                                                                <div class="input-group">
+                                                                    <input id="buy_bitUSD" type="text" class="form-control" name="email" value="235525">
+                                                                    <span class="input-group-addon">VND</span>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-5">
+                                                            <span class="explanation">Giá 1 bitUSD theo VND</span>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div> <!--Giá-->
+
+                                                <div class="row">
+                                                    <div class="price_real">
+                                                        <div class="col-md-7">
+                                                            <div class="col-sm-5 col-xs-7"><label>Giá Bitcoin bạn thực nhận</label></div>
+                                                            <div class="col-sm-4 text-right col-xs-5">
+                                                                <strong>140.577.910 VND / BTC</strong>
+                                                            </div>
+                                                            <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-5">
+                                                            <span class="explanation">Đây là giá tương ứng với tỉ giá Bitstamp (Blockchain) hiện tại (6094.33). Giá sẽ biến động khi tỉ giá Bitstamp (Blockchain) Change.</span>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div> <!--Giá thực trả-->
+
+                                                <div class="price_hide">
+                                                    <div ng-hide="hide_show" class="row ng-hide">
+                                                        <div class="price_hide1">
+                                                            <div class="col-md-7">
+                                                                <div class="col-sm-5 col-xs-7"><label>Giá Bitcoin người mua thấy</label></div>
+                                                                <div class="col-sm-4 text-right col-xs-5">
+                                                                    <strong>142.115.554 VND / BTC</strong>
+                                                                </div>
+                                                                <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="col-md-5">
+                                                                <span class="explanation">Giá đã bao gồm phí giao dịch do người mua chịu.</span>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div> <!--Giá Bitcoin người bán thấy-->
+
+                                                    <div ng-hide="hide_show" class="row ng-hide">
+                                                        <div class="price_hide8">
+                                                            <div class="col-md-7">
+                                                                <div class="col-sm-5 col-xs-7"><label>Đơn vị tiền tệ</label></div>
+                                                                <div class="col-sm-4 text-right col-xs-5">
+                                                                    <strong ng-hide="anhien12">VND</strong>
+                                                                </div>
+                                                                <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+                                                                    <input onclick="this.disabled = true" type="checkbox" ng-model="anhien12" class="btn-change ng-pristine ng-untouched ng-valid ng-empty"> Change
+                                                                </div>
+
+
+                                                                <div ng-show="anhien12" class="col-md-12 ng-hide">
+                                                                    <select class="form-control" name="currency">
+                                                                        <!-- ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="CDF" class="ng-binding ng-scope">CDF</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="CHF" class="ng-binding ng-scope">CHF</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="USD" class="ng-binding ng-scope">USD</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="PLN" class="ng-binding ng-scope">PLN</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="EUR" class="ng-binding ng-scope">EUR</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="CFA" class="ng-binding ng-scope">CFA</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="ZMW" class="ng-binding ng-scope">ZMW</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="PEN" class="ng-binding ng-scope">PEN</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="BOB" class="ng-binding ng-scope">BOB</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="DZD" class="ng-binding ng-scope">DZD</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="ARS" class="ng-binding ng-scope">ARS</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="XAF" class="ng-binding ng-scope">XAF</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="NOK" class="ng-binding ng-scope">NOK</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="BND" class="ng-binding ng-scope">BND</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="KRW" class="ng-binding ng-scope">KRW</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="CAD" class="ng-binding ng-scope">CAD</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="ZAR" class="ng-binding ng-scope">ZAR</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="RWF" class="ng-binding ng-scope">RWF</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="NZD" class="ng-binding ng-scope">NZD</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="CNY" class="ng-binding ng-scope">CNY</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="TZS" class="ng-binding ng-scope">TZS</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="UAH" class="ng-binding ng-scope">UAH</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="RUB" class="ng-binding ng-scope">RUB</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="MXN" class="ng-binding ng-scope">MXN</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="TWD" class="ng-binding ng-scope">TWD</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="SGD" class="ng-binding ng-scope">SGD</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="GBP" class="ng-binding ng-scope">GBP</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="JPY" class="ng-binding ng-scope">JPY</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="KES" class="ng-binding ng-scope">KES</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="THB" class="ng-binding ng-scope">THB</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="IDR" class="ng-binding ng-scope">IDR</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="LAK" class="ng-binding ng-scope">LAK</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="IRR" class="ng-binding ng-scope">IRR</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="GHS" class="ng-binding ng-scope">GHS</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="PHP" class="ng-binding ng-scope">PHP</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="BYN" class="ng-binding ng-scope">BYN</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="OMR" class="ng-binding ng-scope">OMR</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="PKR" class="ng-binding ng-scope">PKR</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="ILS" class="ng-binding ng-scope">ILS</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="DKK" class="ng-binding ng-scope">DKK</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="COP" class="ng-binding ng-scope">COP</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="QAR" class="ng-binding ng-scope">QAR</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="NAD" class="ng-binding ng-scope">NAD</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="AUD" class="ng-binding ng-scope">AUD</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="SEK" class="ng-binding ng-scope">SEK</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="AED" class="ng-binding ng-scope">AED</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="MYR" class="ng-binding ng-scope">MYR</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="TRY" class="ng-binding ng-scope">TRY</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="MMK" class="ng-binding ng-scope">MMK</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="NPR" class="ng-binding ng-scope">NPR</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="VND" class="ng-binding ng-scope">VND</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="UGX" class="ng-binding ng-scope">UGX</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="BRL" class="ng-binding ng-scope">BRL</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="INR" class="ng-binding ng-scope">INR</option><!-- end ngRepeat: rate in ex_rate -->
+                                                                        <option ng-repeat="rate in ex_rate" value="NGN" class="ng-binding ng-scope">NGN</option><!-- end ngRepeat: rate in ex_rate -->
+
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-5">
+                                                                <span class="explanation">Đơn vị tiền tệ để đổi lấy BTC.</span>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div> <!--Đơn vị tiền tệ-->
+
+                                                    <div ng-hide="hide_show" class="row ng-hide">
+                                                        <div class="price_hide2">
+                                                            <div class="col-md-7">
+                                                                <div class="col-sm-5 col-xs-7"><label>Sàn giao dịch tham khảo</label></div>
+                                                                <div class="col-sm-4 text-right col-xs-5">
+                                                                    <strong ng-hide="anhien13">Bitstamp (Blockchain)</strong>
+                                                                </div>
+                                                                <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+                                                                    <input onclick="this.disabled = true" type="checkbox" ng-model="anhien13" class="btn-change ng-pristine ng-untouched ng-valid ng-empty"> Change
+                                                                </div>
+                                                                <select ng-show="anhien13" class="form-control ng-hide" name="reference_exchange">
+                                                                    <option value="bitstamp_BTCUSD">Bitstamp (Blockchain) - 6340.62</option>
+                                                                    <option value="bitfinex_BTCUSD">Bitfinex - 6340.25</option>
+                                                                    <option value="kraken_BTCEUR">Kraken EUR - 5427.5</option>
+                                                                </select>
+
+                                                            </div>
+
+                                                            <div class="col-md-5">
+                                                                <span class="explanation">Sàn giao dịch được dùng để cập nhập giá cho quảng cáo của bạn.</span>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div> <!-- Sàn giao dịch tham khảo -->
+
+                                                    <div ng-hide="hide_show" class="row ng-hide">
+                                                        <div class="price_hide3">
+                                                            <div class="col-md-7">
+                                                                <div class="col-sm-5 col-xs-7"><label>Giá Bitcoin tối thiểu</label></div>
+                                                                <div class="col-sm-4 text-right col-xs-5">
+                                                                    <strong ng-hide="anhien14"></strong>
+                                                                </div>
+                                                                <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+                                                                    <input onclick="this.disabled = true" type="checkbox" ng-model="anhien14" class="btn-change ng-pristine ng-untouched ng-valid ng-empty"> Change
+                                                                </div>
+
+                                                                <div ng-show="anhien14" class="col-md-12 ng-hide">
+                                                                    <div class="input-group">
+                                                                        <input id="buy_bitUSD" type="text" class="form-control" name="email" value="235525">
+                                                                        <span class="input-group-addon">VND</span>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-5">
+                                                                <span class="explanation">Giá tối thiểu bạn chấp nhận cho 1 Bitcoin (tính theo VND).</span>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div> <!-- Giá Bitcoin tối thiểu -->
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div> <!-- giá bán -->
+                                    <div ng-hide="hide_show" class="col-md-12 price_hide ng-hide">
+                                        <h4>GIỚI HẠN</h4>
+
+                                        <div class="allkhung">
+                                            <div class="row">
+                                                <div class="price_hide4">
+                                                    <div class="col-md-7">
+                                                        <div class="col-sm-5 col-xs-7"><label>Số BTC tối thiểu</label></div>
+                                                        <div class="col-sm-4 text-right col-xs-5">
+                                                            <strong ng-hide="anhien15">0,0100 BTC</strong>
+                                                        </div>
+                                                        <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+                                                            <input onclick="this.disabled = true" type="checkbox" ng-model="anhien15" class="btn-change ng-pristine ng-untouched ng-valid ng-empty"> Change
+                                                        </div>
+                                                        <div ng-show="anhien15" class="col-md-12 ng-hide">
+                                                            <div class="input-group">
+                                                                <input id="buy_bitUSD" type="text" class="form-control" name="" value="0.01">
+                                                                <span class="input-group-addon">BTC</span>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-5">
+                                                        <span class="explanation">Số BTC tối thiểu trong một giao dịch. (ít nhất là 0.001 BTC).</span>
+                                                    </div>
+
+                                                </div>
+
+                                            </div> <!-- Số BTC tối thiểu -->
+
+                                            <div ng-hide="hide_show" class="row ng-hide">
+                                                <div class="price_hide5">
+                                                    <div class="col-md-7">
+                                                        <div class="col-sm-5 col-xs-7"><label>Số BTC tối đa</label></div>
+                                                        <div class="col-sm-4 text-right col-xs-5">
+                                                            <strong ng-hide="anhien16">2,0000 BTC</strong>
+                                                        </div>
+                                                        <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+                                                            <input onclick="this.disabled = true" type="checkbox" ng-model="anhien16" class="btn-change ng-pristine ng-untouched ng-valid ng-empty"> Change
+                                                        </div>
+
+                                                        <div ng-show="anhien16" class="col-md-12 ng-hide">
+                                                            <div class="input-group">
+                                                                <input id="buy_bitUSD" type="text" class="form-control" name="" value="2">
+                                                                <span class="input-group-addon">BTC</span>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-5">
+                                                        <span class="explanation">Số BTC tối đa trong một giao dịch. Số dư ví BTC của bạn cũng có thể hạn chế số tiền này. (tối đa 100 BTC).</span>
+                                                    </div>
+
+                                                </div>
+
+                                            </div> <!-- Số BTC tối đa -->
+
+                                            <div ng-hide="hide_show" class="row ng-hide">
+                                                <div class="price_hide6">
+                                                    <div class="col-md-7">
+                                                        <div class="col-sm-5 col-xs-7"><label>Vị trí</label></div>
+                                                        <div class="col-sm-4 text-right col-xs-5">
+                                                            <strong ng-hide="anhien17">Việt Nam</strong>
+                                                        </div>
+                                                        <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+                                                            <input onclick="this.disabled = true" type="checkbox" ng-model="anhien17" class="btn-change ng-pristine ng-untouched ng-valid ng-empty"> Change
+                                                        </div>
+                                                        <div ng-show="anhien17" class="col-md-12 ng-hide">
+                                                            <select class="form-control" name="currency">
+                                                                <!-- ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Australia" class="ng-binding ng-scope">Australia</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Bangladesh" class="ng-binding ng-scope">Bangladesh</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Brunei" class="ng-binding ng-scope">Brunei</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Bolivia" class="ng-binding ng-scope">Bolivia</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Brasil" class="ng-binding ng-scope">Brasil</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Belarus" class="ng-binding ng-scope">Belarus</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Canada" class="ng-binding ng-scope">Canada</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="DR Congo" class="ng-binding ng-scope">DR Congo</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Switzerland" class="ng-binding ng-scope">Switzerland</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Côte d'Ivoire" class="ng-binding ng-scope">Côte d'Ivoire</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Cameroon" class="ng-binding ng-scope">Cameroon</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="中国" class="ng-binding ng-scope">中国</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Colombia" class="ng-binding ng-scope">Colombia</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Deutschland" class="ng-binding ng-scope">Deutschland</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Denmark" class="ng-binding ng-scope">Denmark</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Algeria" class="ng-binding ng-scope">Algeria</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="España" class="ng-binding ng-scope">España</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="United Kingdom" class="ng-binding ng-scope">United Kingdom</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Ghana" class="ng-binding ng-scope">Ghana</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Indonesia" class="ng-binding ng-scope">Indonesia</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Israel" class="ng-binding ng-scope">Israel</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="India" class="ng-binding ng-scope">India</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="جمهوری اسلامی ایران" class="ng-binding ng-scope">جمهوری اسلامی ایران</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Italia" class="ng-binding ng-scope">Italia</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="日本" class="ng-binding ng-scope">日本</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Kenya" class="ng-binding ng-scope">Kenya</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="កម្ពុជា" class="ng-binding ng-scope">កម្ពុជា</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="South Korea" class="ng-binding ng-scope">South Korea</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="ລາວ" class="ng-binding ng-scope">ລາວ</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Myanmar" class="ng-binding ng-scope">Myanmar</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Mexico" class="ng-binding ng-scope">Mexico</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Malaysia" class="ng-binding ng-scope">Malaysia</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Namibia" class="ng-binding ng-scope">Namibia</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Nigeria" class="ng-binding ng-scope">Nigeria</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Netherlands" class="ng-binding ng-scope">Netherlands</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Norway" class="ng-binding ng-scope">Norway</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Nepal" class="ng-binding ng-scope">Nepal</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="New Zealand" class="ng-binding ng-scope">New Zealand</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Oman" class="ng-binding ng-scope">Oman</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Peru" class="ng-binding ng-scope">Peru</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Philippines" class="ng-binding ng-scope">Philippines</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Pakistan" class="ng-binding ng-scope">Pakistan</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Poland" class="ng-binding ng-scope">Poland</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Portugal" class="ng-binding ng-scope">Portugal</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Qatar" class="ng-binding ng-scope">Qatar</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Россия" class="ng-binding ng-scope">Россия</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Rwanda" class="ng-binding ng-scope">Rwanda</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Sweden" class="ng-binding ng-scope">Sweden</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Singapore" class="ng-binding ng-scope">Singapore</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="ประเทศไทย" class="ng-binding ng-scope">ประเทศไทย</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Turkey" class="ng-binding ng-scope">Turkey</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Taiwan" class="ng-binding ng-scope">Taiwan</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Tanzania" class="ng-binding ng-scope">Tanzania</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Ukraine" class="ng-binding ng-scope">Ukraine</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Uganda" class="ng-binding ng-scope">Uganda</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="United States" class="ng-binding ng-scope">United States</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Việt Nam" class="ng-binding ng-scope">Việt Nam</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="South Africa" class="ng-binding ng-scope">South Africa</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Zambia" class="ng-binding ng-scope">Zambia</option><!-- end ngRepeat: countrie in countries -->
+                                                                <option ng-repeat="countrie in countries" value="Zimbabwe" class="ng-binding ng-scope">Zimbabwe</option><!-- end ngRepeat: countrie in countries -->
+
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-5">
+                                                        <span class="explanation"></span>
+                                                    </div>
+
+                                                </div>
+
+                                            </div> <!-- Vị trí -->
+
+                                            <div ng-hide="hide_show" class="row ng-hide">
+                                                <div class="price_hide6">
+                                                    <div class="col-md-7">
+                                                        <div class="col-sm-5 col-xs-7"><label>Từ chối người mua chưa xác minh</label></div>
+                                                        <div class="col-sm-4 text-right col-xs-5">
+                                                            <strong>Có</strong>
+                                                        </div>
+                                                        <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+                                                            <!--<a class="btn-change">Change</a>-->
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-5">
+                                                        <span class="explanation">Chỉ chấp nhận người mua đã xác minh để làm cho các giao dịch của bạn trở nên an toàn hơn</span>
+                                                    </div>
+
+                                                </div>
+
+                                            </div> <!-- Từ chối người mua chưa xác minh -->
+
+                                        </div>
+                                    </div> <!--GIỚI HẠN-->
+
+
+                                    <div class="kng_pay">
+
+                                        <div class="col-md-12">
+                                            <h4>THÔNG TIN THANH TOÁN</h4>
+                                            <div class="allkhung">
+
+                                                <div class="row">
+                                                    <div class="buy_coin_price">
+                                                        <div class="col-md-7">
+                                                            <div class="col-sm-5 col-xs-7"><label>Phương thức thanh toán</label></div>
+                                                            <div class="col-sm-4 text-right col-xs-5">
+                                                                <strong ng-hide="anhien18">Chuyển khoản ngân hàng</strong>
+                                                            </div>
+                                                            <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+                                                                <input onclick="this.disabled = true" type="checkbox" ng-model="anhien18" class="btn-change ng-pristine ng-untouched ng-valid ng-empty"> Change
+                                                            </div>
+                                                            <div ng-show="anhien18" class="col-md-12 ng-hide">
+                                                                <div style="display: block" class="input-group">
+                                                                    <select class="form-control" name="payment_method">
+                                                                        <option value="local_bank">Chuyển khoản ngân hàng</option>
+                                                                    </select>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-5">
+                                                            <span class="explanation"></span>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div> <!-- Phương thức thanh toán -->
+
+                                                <div class="price_hide">
+                                                    <div ng-hide="hide_show" class="row ng-hide">
+                                                        <div class="price_hide1">
+                                                            <div class="col-md-7">
+                                                                <div class="col-sm-5 col-xs-7"><label>Thời gian cho phép thanh toán</label></div>
+                                                                <div class="col-sm-4 text-right col-xs-5">
+                                                                    <strong ng-hide="anhien19">15 phút</strong>
+                                                                </div>
+                                                                <div class="col-sm-3 text-left col-xs-12 text-xs-right">
+                                                                    <input onclick="this.disabled = true" type="checkbox" ng-model="anhien19" class="btn-change ng-pristine ng-untouched ng-valid ng-empty"> Change
+                                                                </div>
+
+                                                                <div ng-show="anhien19" class="col-md-12 ng-hide">
+                                                                    <div style="display: block" class="input-group">
+                                                                        <select class="form-control" name="payment_time">
+                                                                            <option value="15">15 phút</option>
+                                                                            <option value="30">30 phút</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-5">
+                                                                <span class="explanation">Nếu người mua không hoàn thành thanh toán trong thời gian này, giao dịch sẽ bị huỷ tự động.</span>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div> <!--Thời gian cho phép thanh toán-->
+
+
+                                                </div>
+
+
+                                                <div class="price_real">
+                                                    <div class="col-md-12">
+                                                        <label>Tên ngân hàng</label>
+                                                    </div>
+
+                                                    <div class="col-md-7">
+                                                        <select class="form-control">
+                                                            <option value="ACB (Ngân hàng Á Châu)">ACB (Ngân hàng Á Châu)</option>
+                                                            <option value="Vietinbank">Vietinbank</option>
+                                                            <option value="Agribank">Agribank</option>
+                                                            <option value="Sacombank">Sacombank</option>
+                                                            <option value="NamABank">NamABank</option>
+                                                            <option value="Vietcombank">Vietcombank</option>
+                                                            <option value="Eximbank">Eximbank</option>
+                                                            <option value="BIDV">BIDV</option>
+                                                            <option value="DongA Bank">DongA Bank</option>
+                                                            <option value="Maritime Bank">Maritime Bank</option>
+                                                            <option value="Techcombank">Techcombank</option>
+                                                            <option value="VPBank">VPBank</option>
+                                                            <option value="PVcom Bank">PVcom Bank</option>
+                                                            <option value="SHBank">SHBank</option>
+                                                            <option value="HDBank">HDBank</option>
+                                                            <option value="LienVietPostBank">LienVietPostBank</option>
+                                                            <option value="TP Bank">TP Bank</option>
+                                                            <option value="SeABank">SeABank</option>
+                                                            <option value="ABBank">ABBank</option>
+                                                            <option value="BacABank">BacABank</option>
+                                                            <option value="VIBBank">VIBBank</option>
+                                                            <option value="Thẻ ATM (Smartlink)">Thẻ ATM (Smartlink)</option>
+                                                            <option value="MB (Ngân hàng quân đội)">MB (Ngân hàng quân đội)</option>
+                                                            <option value="HSBC">HSBC</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="price_acc">
+
+                                                    <div class="col-md-7">
+                                                        <div class="form-group">
+                                                            <label for="usr_no">Số tài khoản</label>
+                                                            <input type="text" class="form-control" id="usr_no">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="usr">Tên tài khoản</label>
+                                                            <input type="text" class="form-control" id="usr">
+                                                        </div>
+                                                    </div>
+                                                </div><!-- Tên ngân hàng -->
+
+
+
+                                            </div>
+                                        </div>
+                                    </div> <!-- thông tin thanh toán -->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

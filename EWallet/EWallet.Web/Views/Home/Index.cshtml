@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section css{
+    <link href="~/css/styles-457820f8475cf3e460f6.css" rel="stylesheet" />
+}
+<div class="main" role="main" ui-view>
+    <div class="container-fluid">
+        @await Component.InvokeAsync("HomeIntro")
+
+    </div>
+
+    <section class="page-content landing">
+        <div class="container alert-container">
+            <div class="row">
+                <div class="col-sm-12"><div class="position-stablizer"></div><div class="flash-messages"></div><div></div><div class="position-stablizer"></div></div>
+            </div>
+        </div>
+
+        <div class="container" id="landing">
+            <div class="main-container">
+
+                @await Component.InvokeAsync("AdsRefer")
+
+                <br>
+                <div id="offer-list">
+                    @await Component.InvokeAsync("BuyingAdvertisement")
+                    <hr>
+                    @await Component.InvokeAsync("SellingAdvertisement")
+
+                </div>
+
+                <hr>
+                <span>Muốn giá tốt hơn?</span>
+                <a class="btn btn-primary btn-create-offer" href="/advertisement/create">Tạo quảng cáo</a>
+
+                <div class="press-section">
+                    <div class="title-section text-center"><hr class="hr-over"><span class="title-text">Được đăng trên:</span></div>
+                    <div class="row">
+                        <div class="press-item text-center col-xs-4" data-animation="fadeInDown" data-animation-delay="0">
+                            <img alt="coindesk" class="img-responsive" title="coindesk" src="~/images/coindesk.png">
+                        </div>
+                        <div class="press-item text-center col-xs-4" data-animation="fadeInDown" data-animation-delay="0">
+                            <img alt="cointelegraph" class="img-responsive" title="cointelegraph" src="~/images/cointelegraph.png">
+                        </div>
+                        <div class="press-item text-center col-xs-4" data-animation="fadeInDown" data-animation-delay="0">
+                            <img alt="yahoo-finance" class="img-responsive" title="yahoo-finance" src="~/images/yahoo-finance.png">
+                        </div>
+                    </div>
+                </div>
+
+                @await Component.InvokeAsync("TradeFeedback")
+
+
+            </div>
+        </div>
+    </section>
+</div>
